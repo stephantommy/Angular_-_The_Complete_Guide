@@ -1,0 +1,33 @@
+<label>Server Name</label>
+<input
+  type="text"
+  class="form-control"
+  (input)="onUpdateServerName($event)"
+  [value]="serverName"
+/>
+<input type="text" class="form-control" [(ngModel)]="serverName" />
+<p>{{ serverName }}</p>
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<p innerText="{{ allowNewServer }}"></p>
+<p>{{ serverCreationStatus }}</p>
+<p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
+<hr />
+<app-server *ngFor="let server of servers"></app-server>
+
+<!-- to add a property binding, use : [] -->
+<!-- to add a event binding, use : () -->
+<!-- to add two way binding (property and event binding), use : [()] -->
+<!-- 
+    Directives:
+    - Component Directive -> directives with a template. This type of directive is the most common directive type.
+    - Attribute Directive -> directives that change the appearance or behavior of an element, component, or another directive.
+      ex : [ngClass], [ngStyle], [(ngModel)]
+    - Structural Directive -> directives that change the DOM layout by adding and removing DOM elements.
+      Must use "*". ex : *ngIf
+-->
