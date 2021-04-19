@@ -7,9 +7,36 @@
   <div class="row">
     <div class="col-xs-12">
       <app-server-element
-        *ngFor="let serverElement of serverElements"
+        *ngFor="let serverElement of serverElements; index as i"
         [servervalue]="serverElement"
-      ></app-server-element>
+        [description]="description"
+      >
+        <strong *ngIf="serverElement.type === 'server'" style="color: red">{{
+          serverElement.content
+        }}</strong>
+        <em *ngIf="serverElement.type === 'blueprint'">{{
+          serverElement.content
+        }}</em>
+        <hr />
+        <p style="color: black" #contentDescription>{{ description }}</p>
+        <button
+          style="color: black"
+          class="btn btn-secondary"
+          (click)="onDescriptionChange()"
+        >
+          Edit
+        </button>
+        <button
+          style="color: white"
+          class="btn btn-danger"
+          (click)="onDelete(i)"
+        >
+          Delete
+        </button>
+      </app-server-element>
     </div>
   </div>
 </div>
+
+<!-- By default, angular removes everything inside the opening and the closing tag of a custom component -->
+<!-- If you want to pass something through the opening and the closing tag of a custom component (ex: htlm element), the custom component must have ng-content inside of it -->

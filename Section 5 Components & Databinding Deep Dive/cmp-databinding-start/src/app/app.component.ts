@@ -9,6 +9,7 @@ export class AppComponent {
   serverElements = [
     { type: "server", name: "test server", content: "content" },
   ];
+  description = "description";
 
   onServerAdded(serverData: { serverName: string; serverContent: string }) {
     this.serverElements.push({
@@ -27,5 +28,14 @@ export class AppComponent {
       name: blueprintData.serverName,
       content: blueprintData.serverContent,
     });
+  }
+
+  onDescriptionChange() {
+    this.description += " changed";
+  }
+
+  onDelete(i: number) {
+    console.log("deleting: ", i);
+    this.serverElements.splice(i, 1);
   }
 }

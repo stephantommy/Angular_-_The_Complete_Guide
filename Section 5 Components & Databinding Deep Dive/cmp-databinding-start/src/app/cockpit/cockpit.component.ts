@@ -1,4 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
 
 @Component({
   selector: "app-cockpit",
@@ -6,36 +13,44 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./cockpit.component.css"],
 })
 export class CockpitComponent implements OnInit {
-  // @Output() create a custom event
-  // @Output() -> will create custom event with the name of the internal property
+  // @Output() -> will create custom event, with the name of the internal property
   // @Output('alias') -> will create custom event with custom name
   @Output("servercreated") serverCreated = new EventEmitter<{
     serverName: string;
     serverContent: string;
   }>();
-  @Output("servercreated") blueprintCreated = new EventEmitter<{
+  @Output("blueprintcreated") blueprintCreated = new EventEmitter<{
     serverName: string;
     serverContent: string;
   }>();
 
-  newServerName = "";
-  newServerContent = "";
+  // @ViewChild('*local reference') -> create a variable of an html element
+  // add { static: true } as a second argument of @ViewChild() and also @ContentChild() (which you'll learn about later) IF you plan on accessing the selected element inside of ngOnInit()
+  @ViewChild("serverContentInput") serverContentInput: ElementRef;
+
+  // newServerName = "";
+  // newServerContent = "";
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onAddServer() {
+  onAddServer(serverNameInput: HTMLInputElement) {
+    console.log(serverNameInput);
     this.serverCreated.emit({
-      serverName: this.newServerName,
-      serverContent: this.newServerContent,
+      // serverName: this.newServerName,
+      // serverContent: this.newServerContent,
+      serverName: serverNameInput.value,
+      serverContent: this.serverContentInput.nativeElement.value,
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(serverNameInput: HTMLInputElement) {
     this.blueprintCreated.emit({
-      serverName: this.newServerName,
-      serverContent: this.newServerContent,
+      // serverName: this.newServerName,
+      // serverContent: this.newServerContent,
+      serverName: serverNameInput.value,
+      serverContent: this.serverContentInput.nativeElement.value,
     });
   }
 }
