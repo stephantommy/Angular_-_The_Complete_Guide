@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-servers",
-  // selector: '[app-servers]',                 declaring selector as attribute (just like css attribute)
+  // selector: '[app-servers]',                 declaring selector as attribute (just like html attribute)
   // selector: '.app-servers',                  declaring selector as class (just like css class)
   templateUrl: "./servers.component.html",
   // template: `
