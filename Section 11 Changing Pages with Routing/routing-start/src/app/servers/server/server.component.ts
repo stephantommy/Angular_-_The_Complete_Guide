@@ -22,7 +22,7 @@ export class ServerComponent implements OnInit {
     this.server = this.serversService.getServer(id);
 
     this.route.params.subscribe((params: Params) => {
-      let id: number = +params["id"];
+      id = +params["id"];
       this.server = this.serversService.getServer(id);
     });
   }
